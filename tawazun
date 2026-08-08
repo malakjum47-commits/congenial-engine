@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تَوازُن | TAWAZUN</title>
+    <!-- Google Fonts for Arabic & English -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f8fafc;
+            --work-color: #2563eb;
+            --family-color: #ec4899;
+            --self-color: #10b981;
+            --whatsapp-color: #25d366;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --card-bg: #ffffff;
+            --nav-bg: #ffffff;
+            --danger-color: #ef4444;
+        }
+
+        body.calm-mode {
+            --primary-bg: #fdfbf7;
+            --card-bg: #fffcf8;
+            --text-dark: #332726;
+            --nav-bg: #f7f0e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--nav-bg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-ar {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--family-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-divider {
+            color: #cbd5e1;
+            font-weight: 300;
+            font-size: 1.6rem;
+        }
+
+        .logo-en {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            color: var(--family-color);
+            background-color: #fce7f3;
+        }
+
+        .btn-reset-mode {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 2px solid #fde68a;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-top: 1rem;
+        }
+
+        .hero-title-en {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--family-color);
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.25;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--family-color);
+            color: white;
+            padding: 1rem 2.8rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.35);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .calm-banner {
+            display: none;
+            background-color: #fef3c7;
+            color: #78350f;
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+
+        body.calm-mode .calm-banner { display: block; }
+        body.calm-mode .track-card.work { display: none; }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .track-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border-top: 6px solid #ccc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-card.work { border-color: var(--work-color); }
+        .track-card.family { border-color: var(--family-color); }
+        .track-card.self { border-color: var(--self-color); }
+
+        .track-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-task-box {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .add-task-box input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .add-task-btn {
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .reminder-list {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 1.15rem;
+        }
+
+        .reminder-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .reminder-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .reminder-item.completed span {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 0.4rem 0.7rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .support-section {
+            margin-top: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .support-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border-right: 6px solid var(--family-color);
+        }
+
+        .support-card h4 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .support-card p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .record-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .btn-record {
+            background-color: #fecdd3;
+            color: #9f1239;
+            border: 2px solid #fda4af;
+            padding: 0.9rem 1.5rem;
+            border-radius: 16px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-record.recording {
+            background-color: #ef4444;
+            color: white;
+            border-color: #dc2626;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .voice-live-preview {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #64748b;
+            min-height: 50px;
+        }
+
+        .audio-notes-container {
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border-top: 6px solid #8b5cf6;
+        }
+
+        .audio-notes-container h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+        }
+
+        .audio-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .audio-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .audio-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .audio-item-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .audio-item-date {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-play-text {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .btn-delete-audio {
+            background-color: #fee2e2;
+            color: var(--danger-color);
+            border: 1px solid #fca5a5;
+            padding: 0.5rem 0.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .empty-audio-msg {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .balance-container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            margin: 2rem 0;
+            text-align: right;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            height: 16px;
+            background-color: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .feedback-box {
+            background-color: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            color: #166534;
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .reward-badge { font-size: 4rem; margin-bottom: 1rem; }
+
+        .reward-box {
+            background: #fdf2f8;
+            border: 2px dashed var(--family-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #831843;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .btn-accept { background-color: var(--family-color); color: white; }
+        .btn-reroll { background-color: #f1f5f9; color: var(--text-dark); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="navigateTo('home')">
+            <span class="logo-ar">تَوازُن</span>
+            <span class="logo-divider">|</span>
+            <span class="logo-en">TAWAZUN</span>
+        </div>
+        <div class="nav-links">
+            <button id="nav-home" class="active" onclick="navigateTo('home')">الرئيسية</button>
+            <button id="nav-dashboard" onclick="navigateTo('dashboard')">التذكيرات اليومية</button>
+            <button id="nav-balance" onclick="navigateTo('balance')">مؤشر الاتزان</button>
+            <button class="btn-reset-mode" onclick="toggleCalmMode()">
+                <span id="calm-icon">🌙</span> <span id="calm-text">ساعة الهدوء</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div id="page-home" class="page active">
+            <div class="hero">
+                <div class="hero-title-en">TAWAZUN APP</div>
+                <h1>تَوازُن - لأن وقتكِ يهم، وتوازنكِ يُصنع.</h1>
+                <p>مساعدكِ الرقمي الذكي لتنسيق مهام العمل، متطلبات الأسرة، والفضفضة الصوتية لرعاية ذاتكِ دون إجهاد أو شعور بالذنب.</p>
+                <button class="btn-primary" onclick="navigateTo('dashboard')">ابدئي تنظيم يومكِ الآن</button>
+            </div>
+        </div>
+
+        <div id="page-dashboard" class="page">
+            <div class="dashboard-header">
+                <h2>تذكيرات اليوم والفضفضة</h2>
+                <span id="date-display" style="color: var(--text-muted); font-size: 1.1rem; font-weight: 700;"></span>
+            </div>
+
+            <div class="calm-banner">
+                ☕ وضع الهدوء مفعل الآن! تم إخفاء مهام العمل لتستمتعي بوقتكِ مع أسرتكِ ونفسكِ.
+            </div>
+
+            <div class="tracks-grid">
+                <div class="track-card work">
+                    <div class="track-title" style="color: var(--work-color);">
+                        <span>💼 العمل</span>
+                    </div>
+                    <div class="add-task-box">
+                        <input type="text" id="input-work" placeholder="اكتبي مهمة عمل جديدة..." onkeypress="handleKeyPress(event, 'work')">
+                        <button class="add-task-btn" onclick="addNewTask('work')" title="إضافة مهمة">✏️</button>
+                    </div>
+                    <ul class="reminder-list" id="list-work"></ul>
+                </div>
+
+                <div class="track-card family">
+                    <div class="track-title" style="color: var(--family-color);">
+                        <span>🏡 الأسرة والأبناء</span>
+                    </div>
+                    <div class="add-task-box">
+                        <input type="text" id="input-family" placeholder="اكتبي مهمة أسرية جديدة..." onkeypress="handleKeyPress(event, 'family')">
+                        <button class="add-task-btn" onclick="addNewTask('family')" title="إضافة مهمة">✏️</button>
+                    </div>
+                    <ul class="reminder-list" id="list-family"></ul>
+                </div>
+
+                <div class="track-card self">
+                    <div class="track-title" style="color: var(--self-color);">
+                        <span>🌱 أنـا (الرعاية الذاتية)</span>
+                    </div>
+                    <div class="add-task-box">
+                        <input type="text" id="input-self" placeholder="اكتبي مهمة خاصة بكِ..." onkeypress="handleKeyPress(event, 'self')">
+                        <button class="add-task-btn" onclick="addNewTask('self')" title="إضافة مهمة">✏️</button>
+                    </div>
+                    <ul class="reminder-list" id="list-self"></ul>
+                </div>
+            </div>
+
+            <div class="support-section">
+                <div class="support-card">
+                    <h4>✨ كبسولة الدعم اليومية</h4>
+                    <p>"ليس عليكِ إنجاز كل شيء اليوم بنفسكِ، التفويض ذكاء وإعطاء المساحة لنفسكِ ضرورة."</p>
+                </div>
+
+                <div class="support-card">
+                    <h4>🎙️ الفضفضة والتسجيل الصوتي</h4>
+                    <p>تحدثي الآن براحتكِ؛ سيتعرف النظام على صوتكِ فوراً ويحفظ كلمتكِ صوتياً وكتابياً في مذكراتكِ الخاصه.</p>
+                    <div class="record-box">
+                        <button class="btn-record" id="record-btn" onclick="toggleSmartVoiceRecording()">
+                            <span id="record-icon">🎙️</span>
+                            <span id="record-text">اضغطي هنا للحديث والفضفضة</span>
+                        </button>
+                        <div class="voice-live-preview" id="voice-preview">
+                            المعاينه الحية للكلام المسموع ستظهر هنا...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-notes-container">
+                <h4>🎙️ مذكرات التسجيلات الصوتية والفضفضة</h4>
+                <ul class="audio-list" id="audio-notes-list"></ul>
+                <div class="empty-audio-msg" id="empty-audio-msg">لا توجد تسجيلات صوتية محفوظة بعد. يمكنكِ الفضفضة والتسجيل في أي وقت!</div>
+            </div>
+        </div>
+
+        <div id="page-balance" class="page">
+            <div class="balance-container">
+                <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">مؤشر التوازن اليومي</h2>
+                <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">تحليل توزيع طاقتكِ اليوم بين مجالات حياتكِ المختلفة</p>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>إنجاز مهام العمل</span>
+                        <span id="work-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="work-bar" class="progress-fill" style="background-color: var(--work-color);"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>إنجاز مهام الأسرة</span>
+                        <span id="family-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="family-bar" class="progress-fill" style="background-color: var(--family-color);"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>رعاية الذات والصحة</span>
+                        <span id="self-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="self-bar" class="progress-fill" style="background-color: var(--self-color);"></div>
+                    </div>
+                </div>
+
+                <div class="feedback-box" id="smart-feedback">
+                    أهلاً بكِ! قومي بإكمال بعض المهام في لوحة التذكيرات لرؤية تحليل اتزانكِ اليومي.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-overlay" id="reward-modal">
+        <div class="modal-card">
+            <div class="reward-badge">🎉🎁</div>
+            <h3 style="color: var(--family-color); font-size: 2rem; margin-bottom: 0.5rem;">إنجاز مذهل! 100%</h3>
+            <p style="color: var(--text-muted); font-size: 1.15rem;">لقد أتممتِ مهامكِ بنجاح اليوم، وحان الوقت لتكافئي جهودكِ!</p>
+            <div class="reward-box" id="reward-text-display">
+                كافئ نفسكِ برسمة أو لوحة جدارية جديدة! 🎨
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-accept" onclick="closeRewardModal()">سأكافئ نفسي بها! ✨</button>
+                <button class="btn-modal btn-reroll" onclick="generateRandomReward()">🎲 اقتراح آخر</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rewardSuggestions = [
+            "كافئ نفسكِ برسمة جديدة أو لوحة جدارية! 🎨",
+            "كافئ نفسكِ بوجبة شهية في مطعمكِ المفضل! 🍽️",
+            "كافئ نفسكِ باستراحة قهوة هادئة مع كتاب تحبينه! ☕",
+            "كافئ نفسكِ بجلسة عناية بالبشرة واستجمام منزلية! 💆‍♀️",
+            "كافئ نفسكِ بمشاهدة فيلمكِ المفضل مع مشروب دافئ! 🎬",
+            "كافئ نفسكِ بنزهة قصيرة واستنشاق الهواء النقية! 🌿",
+            "كافئ نفسكِ بشراء شمعة معطرة ذات رائحة هادئة! 🕯️"
+        ];
+
+        const tasksData = {
+            work: [
+                { id: 1, text: "إرسال تقرير المبيعات الأسبوعي", completed: false },
+                { id: 2, text: "اجتماع فريق التسويق (11:00 صباحاً)", completed: false }
+            ],
+            family: [
+                { id: 3, text: "مراجعة دروس العلوم لمحمد", completed: false },
+                { id: 4, text: "شراء مستلزمات المنزل", completed: false }
+            ],
+            self: [
+                { id: 5, text: "شرب 2 لتر من الماء", completed: false },
+                { id: 6, text: "استراحة تنفس لمدة 10 دقائق", completed: false }
+            ]
+        };
+
+        let audioNotes = [];
+        let recognition;
+        let isRecording = false;
+
+        let isCalmMode = false;
+        let hasRewarded = { work: false, family: false, self: false };
+
+        document.getElementById('date-display').innerText = new Date().toLocaleDateString('ar-EG', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        renderAllTasks();
+
+        function renderAllTasks() {
+            ['work', 'family', 'self'].forEach(category => {
+                const listEl = document.getElementById(`list-${category}`);
+                listEl.innerHTML = '';
+
+                tasksData[category].forEach(task => {
+                    const li = document.createElement('li');
+                    li.className = `reminder-item ${task.completed ? 'completed' : ''}`;
+                    
+                    const whatsappBtn = category === 'family' 
+                        ? `<button class="btn-action" onclick="openWhatsAppDirectly('${task.text}')" title="مشاركة مباشرة عبر الواتساب">💬</button>` 
+                        : '';
+
+                    li.innerHTML = `
+                        <div class="reminder-content">
+                            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask('${category}', ${task.id})">
+                            <span>${task.text}</span>
+                        </div>
+                        <div class="action-btns">
+                            ${whatsappBtn}
+                            <button class="btn-action" onclick="deleteTask('${category}', ${task.id})" title="حذف">🗑️</button>
+                        </div>
+                    `;
+                    listEl.appendChild(li);
+                });
+            });
+        }
+
+        function openWhatsAppDirectly(taskText) {
+            const message = encodeURIComponent(`أهلاً! أرجو المساعدة في إنجاز هذه المهمة الأسرية: "${taskText}". شكراً لك!`);
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        function addNewTask(category) {
+            const input = document.getElementById(`input-${category}`);
+            const text = input.value.trim();
+
+            if (text !== "") {
+                tasksData[category].push({ id: Date.now(), text: text, completed: false });
+                input.value = "";
+                hasRewarded[category] = false;
+                renderAllTasks();
+            }
+        }
+
+        function handleKeyPress(event, category) {
+            if (event.key === 'Enter') addNewTask(category);
+        }
+
+        function toggleTask(category, taskId) {
+            const task = tasksData[category].find(t => t.id === taskId);
+            if (task) {
+                task.completed = !task.completed;
+                renderAllTasks();
+            }
+        }
+
+        function deleteTask(category, taskId) {
+            tasksData[category] = tasksData[category].filter(t => t.id !== taskId);
+            renderAllTasks();
+        }
+
+        /* ----- محرك التسجيل والتحويل الصوتي المتوافق مع Canva ----- */
+        function toggleSmartVoiceRecording() {
+            const recordBtn = document.getElementById('record-btn');
+            const recordText = document.getElementById('record-text');
+            const recordIcon = document.getElementById('record-icon');
+            const voicePreview = document.getElementById('voice-preview');
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+                const manualText = prompt("متصفحك يمنع الميكروفون المباشر داخل Canva، اكتبي فضفضتكِ هنا وستنحفظ في مذكراتكِ الصوتية:");
+                if (manualText) saveAudioNote(manualText);
+                return;
+            }
+
+            if (!isRecording) {
+                recognition = new SpeechRecognition();
+                recognition.lang = 'ar-SA';
+                recognition.interimResults = true;
+                recognition.continuous = true;
+
+                let recordedText = '';
+
+                recognition.onstart = function() {
+                    isRecording = true;
+                    recordBtn.classList.add('recording');
+                    recordText.innerText = 'جاري الاستماع لفضفضتكِ... (اضغطي للإنهاء والحفظ)';
+                    recordIcon.innerText = '⏹️';
+                    voicePreview.innerText = 'تحدثي الآن...';
+                };
+
+                recognition.onresult = function(event) {
+                    recordedText = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        recordedText += event.results[i][0].transcript;
+                    }
+                    voicePreview.innerText = recordedText;
+                };
+
+                recognition.onerror = function() {
+                    voicePreview.innerText = 'تعذر استلام الصوت. يمكنك إدخال الفضفضة كتمثيل صوتي.';
+                };
+
+                recognition.onend = function() {
+                    isRecording = false;
+                    recordBtn.classList.remove('recording');
+                    recordText.innerText = 'اضغطي هنا للحديث والفضفضة';
+                    recordIcon.innerText = '🎙️';
+
+                    if (recordedText.trim() !== '') {
+                        saveAudioNote(recordedText);
+                        voicePreview.innerText = 'تم حفظ الفضفضة بنجاح في المذكرات بالأسفل! ✨';
+                    } else {
+                        voicePreview.innerText = 'لم يتم التقاط صوت، جربي الضغط والتحدث مجدداً.';
+                    }
+                };
+
+                recognition.start();
+
+            } else {
+                if (recognition) recognition.stop();
+            }
+        }
+
+        function saveAudioNote(text) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) + ' - ' + now.toLocaleDateString('ar-EG');
+            
+            const newAudioNote = {
+                id: Date.now(),
+                title: text,
+                date: timeString
+            };
+
+            audioNotes.unshift(newAudioNote);
+            renderAudioNotes();
+        }
+
+        function renderAudioNotes() {
+            const listEl = document.getElementById('audio-notes-list');
+            const emptyMsg = document.getElementById('empty-audio-msg');
+
+            listEl.innerHTML = '';
+
+            if (audioNotes.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            } else {
+                emptyMsg.style.display = 'none';
+            }
+
+            audioNotes.forEach(note => {
+                const li = document.createElement('li');
+                li.className = 'audio-item';
+
+                li.innerHTML = `
+                    <div class="audio-item-info">
+                        <span class="audio-item-title">" ${note.title} "</span>
+                        <span class="audio-item-date">⏱️ ${note.date}</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="btn-play-text" onclick="speakText('${encodeURIComponent(note.title)}')">🔊 استماع للصوت</button>
+                        <button class="btn-delete-audio" onclick="deleteAudioNote(${note.id})" title="حذف">🗑️</button>
+                    </div>
+                `;
+
+                listEl.appendChild(li);
+            });
+        }
+
+        function speakText(encodedText) {
+            const text = decodeURIComponent(encodedText);
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ar-SA';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function deleteAudioNote(id) {
+            audioNotes = audioNotes.filter(note => note.id !== id);
+            renderAudioNotes();
+        }
+
+        function toggleCalmMode() {
+            isCalmMode = !isCalmMode;
+            document.body.classList.toggle('calm-mode', isCalmMode);
+            
+            const btnText = document.getElementById('calm-text');
+            const btnIcon = document.getElementById('calm-icon');
+
+            if (isCalmMode) {
+                btnText.innerText = "وضع العمل";
+                btnIcon.innerText = "☀️";
+            } else {
+                btnText.innerText = "ساعة الهدوء";
+                btnIcon.innerText = "🌙";
+            }
+        }
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(`page-${pageId}`).classList.add('active');
+            const targetNav = document.getElementById(`nav-${pageId}`);
+            if (targetNav) targetNav.classList.add('active');
+
+            if (pageId === 'balance') updateBalanceAnalytics();
+        }
+
+        function updateBalanceAnalytics() {
+            const calcPercent = (category) => {
+                const total = tasksData[category].length;
+                if (total === 0) return 0;
+                const completed = tasksData[category].filter(t => t.completed).length;
+                return Math.round((completed / total) * 100);
+            };
+
+            const workP = calcPercent('work');
+            const familyP = calcPercent('family');
+            const selfP = calcPercent('self');
+
+            document.getElementById('work-bar').style.width = workP + '%';
+            document.getElementById('work-percent').innerText = workP + '%';
+
+            document.getElementById('family-bar').style.width = familyP + '%';
+            document.getElementById('family-percent').innerText = familyP + '%';
+
+            document.getElementById('self-bar').style.width = selfP + '%';
+            document.getElementById('self-percent').innerText = selfP + '%';
+
+            const feedbackEl = document.getElementById('smart-feedback');
+
+            if ((workP === 100 && !hasRewarded.work) || 
+                (familyP === 100 && !hasRewarded.family) || 
+                (selfP === 100 && !hasRewarded.self)) {
+                
+                if (workP === 100) hasRewarded.work = true;
+                if (familyP === 100) hasRewarded.family = true;
+                if (selfP === 100) hasRewarded.self = true;
+
+                generateRandomReward();
+                openRewardModal();
+            }
+
+            if (workP > 50 && selfP === 0) {
+                feedbackEl.innerText = "💡 تنبيه اتزان: لقد بذلتِ جهداً كبيراً في العمل اليوم! لا تنسي تخصيص 10 دقائق لرعاية ذاتكِ الآن والفضفضة الصوتية.";
+                feedbackEl.style.backgroundColor = "#fffbeeb";
+                feedbackEl.style.color = "#b45309";
+            } else if (selfP > 0 && familyP > 0 && workP > 0) {
+                feedbackEl.innerText = "🌟 يومكِ متوازن بشكل رائع! أحسنتِ في توزيع طاقتكِ بين مختلف جوانب حياتكِ.";
+                feedbackEl.style.backgroundColor = "#f0fdf4";
+                feedbackEl.style.color = "#166534";
+            } else {
+                feedbackEl.innerText = "💪 واصلي خطتكِ اليومية بحب، وتذكري أن إنجاز أي شيء بسيط هو خطوة نحو التوازن.";
+                feedbackEl.style.backgroundColor = "#f1f5f9";
+                feedbackEl.style.color = "#334155";
+            }
+        }
+
+        function generateRandomReward() {
+            const randomIndex = Math.floor(Math.random() * rewardSuggestions.length);
+            document.getElementById('reward-text-display').innerText = rewardSuggestions[randomIndex];
+        }
+
+        function openRewardModal() {
+            document.getElementById('reward-modal').classList.add('active');
+        }
+
+        function closeRewardModal() {
+            document.getElementById('reward-modal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
+
